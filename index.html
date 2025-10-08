@@ -16,25 +16,74 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: #e0e0e0;
             min-height: 100vh;
-            padding: 20px;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 20px;
         }
         
         header {
             background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
+            padding: 20px 0;
             border-bottom: 3px solid #c19f36;
             margin-bottom: 30px;
-            border-radius: 8px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: #c19f36;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
         }
         
         h1 {
             color: #c19f36;
+            font-size: 28px;
+            text-transform: uppercase;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background: #c19f36;
+            color: #000;
+        }
+        
+        .page-title {
             text-align: center;
+            margin-bottom: 30px;
+            color: #c19f36;
             font-size: 32px;
             text-transform: uppercase;
         }
@@ -67,7 +116,7 @@
             align-items: center;
             justify-content: center;
             color: #c19f36;
-            font-size: 48px;
+            font-size: 18px;
             border-bottom: 2px solid #c19f36;
         }
         
@@ -91,7 +140,6 @@
         .news-short {
             line-height: 1.5;
             margin-bottom: 15px;
-            min-height: 60px;
         }
         
         .news-link {
@@ -109,16 +157,84 @@
             background: #e6c158;
         }
         
+        .news-detail {
+            background: rgba(30, 30, 46, 0.8);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+        }
+        
+        .detail-image {
+            width: 100%;
+            height: 300px;
+            background: #2a2a3e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c19f36;
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 2px solid #c19f36;
+        }
+        
+        .detail-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #c19f36;
+        }
+        
+        .detail-date {
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .detail-full-text {
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: #333;
+            color: #e0e0e0;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #444;
+        }
+        
         footer {
             background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
+            padding: 20px 0;
             text-align: center;
             border-top: 2px solid #c19f36;
             margin-top: 40px;
-            border-radius: 8px;
+        }
+        
+        .hidden {
+            display: none;
         }
         
         @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
             .news-container {
                 grid-template-columns: 1fr;
             }
@@ -126,22 +242,242 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>World of Tanks - Последние новости</h1>
-        </header>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">WoT</div>
+                    <h1>World of Tanks</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="news-list">Главная</a></li>
+                        <li><a href="#" class="nav-link" data-page="about">О игре</a></li>
+                        <li><a href="#" class="nav-link" data-page="contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-        <div id="news-container" class="news-container">
-            <!-- Новости будут загружены здесь через JavaScript -->
+    <div class="container">
+        <div id="news-list-page" class="page">
+            <h2 class="page-title">Последние новости World of Tanks</h2>
+            <div id="news-container" class="news-container">
+                <!-- Новости будут загружены здесь -->
+            </div>
         </div>
 
-        <footer>
-            <p>© 2024 World of Tanks. Все права защищены.</p>
-        </footer>
+        <div id="news-detail-page" class="page hidden">
+            <div id="news-detail" class="news-detail">
+                <!-- Детальная информация о новости будет загружена здесь -->
+            </div>
+            <a href="#" class="back-link" id="back-to-news">← Назад к списку новостей</a>
+        </div>
+
+        <div id="about-page" class="page hidden">
+            <div class="news-detail">
+                <h2 class="detail-title">О игре World of Tanks</h2>
+                <p class="detail-full-text">
+                    World of Tanks — это массовая многопользовательская онлайн-игра, посвященная бронированным машинам середины XX века. 
+                    Игроки принимают участие в сражениях на танках Второй мировой войны и послевоенного периода в режиме «15 на 15».
+                    <br><br>
+                    В игре представлено более 600 боевых машин СССР, Германии, США, Франции, Великобритании, Китая, Японии, Чехословакии, Польши, Швеции, Италии и других стран.
+                    <br><br>
+                    World of Tanks развивает жанр экшена с элементами ролевой игры, стратегии и симулятора.
+                </p>
+            </div>
+        </div>
+
+        <div id="contacts-page" class="page hidden">
+            <div class="news-detail">
+                <h2 class="detail-title">Контакты</h2>
+                <p class="detail-full-text">
+                    <strong>Разработчик:</strong> Wargaming.net<br>
+                    <strong>Официальный сайт:</strong> worldoftanks.ru<br>
+                    <strong>Техническая поддержка:</strong> support@wargaming.net<br>
+                    <strong>Сообщество:</strong> forum.worldoftanks.ru
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- Подключение JavaScript файлов -->
-    <script src="news-data.js"></script>
-    <script src="news-list.js"></script>
+    <footer>
+        <div class="container">
+            <p>© 2024 World of Tanks. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Массив данных с новостями о World of Tanks
+        const newsData = [
+            {
+                id: 1,
+                title: "Новый патч 1.23",
+                date: "2024-03-15",
+                imageSmall: "Обновление баланса",
+                imageLarge: "Обновление баланса техники",
+                shortText: "В новом обновлении представлены изменения баланса для 15 танков и добавлены новые карты.",
+                fullText: "В патче 1.23 разработчики внесли значительные изменения в баланс игры. Были пересмотрены характеристики 15 боевых машин, включая советские тяжелые танки и немецкие ПТ-САУ. Также добавлены две новые карты: 'Туманная долина' и 'Промзона'. Исправлены многочисленные ошибки и улучшена производительность игры на слабых компьютерах. Обновление уже доступно для загрузки через лаунчер."
+            },
+            {
+                id: 2,
+                title: "Битва наций 2024",
+                date: "2024-03-10",
+                imageSmall: "Киберспортивный турнир",
+                imageLarge: "Киберспортивный турнир Битва наций",
+                shortText: "Объявлены даты проведения международного турнира по World of Tanks.",
+                fullText: "Крупнейший киберспортивный турнир по World of Tanks 'Битва наций' пройдет с 15 по 30 июня 2024 года. В этом году призовой фонд составляет $500,000. Команды из 16 стран будут сражаться за звание чемпионов. Россию будет представлять команда 'Hellraisers', прошлогодние победители турнира. Трансляции матчей будут доступны на официальном канале World of Tanks в Twitch и YouTube."
+            },
+            {
+                id: 3,
+                title: "Новая ветка техники",
+                date: "2024-03-05",
+                imageSmall: "Итальянские СТ",
+                imageLarge: "Новая ветка итальянских средних танков",
+                shortText: "В игру добавлена ветка итальянских средних танков с уникальной системой перезарядки.",
+                fullText: "Разработчики представили новую ветку итальянских средних танков, которая включает 10 боевых машин от уровня I до X. Особенностью этой ветки является уникальная система перезарядки 'Drum': танки имеют барабан на 3-4 снаряда с быстрой перезарядкой внутри барабана, но длительной перезарядкой всего барабана. Это позволяет наносить значительный урон за короткое время, но требует тщательного планирования атак. Флагманом ветки стал танк X уровня Progetto M40 mod. 65."
+            },
+            {
+                id: 4,
+                title: "Событие 'Битва титанов'",
+                date: "2024-02-28",
+                imageSmall: "Ограниченное событие",
+                imageLarge: "Ограниченное событие Битва титанов",
+                shortText: "С 1 по 15 марта в игре проходит специальное событие с уникальными механиками.",
+                fullText: "С 1 по 15 марта в World of Tanks проходит ограниченное событие 'Битва титанов'. В рамках события игроки могут принять участие в специальных боях 7 на 7, где доступны только тяжелые танки уровней VIII-X. За победы в событии можно получить эксклюзивные стили для техники, уникальные эмблемы и надписи, а также премиум-аккаунт. Кроме того, впервые в истории игры появится возможность временно использовать легендарные танки, которые ранее были удалены из продажи."
+            },
+            {
+                id: 5,
+                title: "Обновление графики Ultra HD",
+                date: "2024-02-20",
+                imageSmall: "Улучшенная графика",
+                imageLarge: "Обновление графики Ultra HD",
+                shortText: "Вышло масштабное обновление графики для современных видеокарт.",
+                fullText: "Разработчики выпустили масштабное обновление графики Ultra HD, которое значительно улучшает визуальную составляющую игры. Теперь поддерживаются текстуры 4K, улучшено освещение, тени и эффекты погоды. Также добавлена поддержка технологии трассировки лучей (ray tracing) для совместимых видеокарт. Для использования новых графических возможностей требуется видеокарта не ниже NVIDIA RTX 2060 или AMD RX 5700. Обновление доступно в настройках графики как отдельный пресет 'Ultra HD'."
+            },
+            {
+                id: 6,
+                title: "Рейтинговые бои сезон 15",
+                date: "2024-02-15",
+                imageSmall: "Рейтинговые бои",
+                imageLarge: "Рейтинговые бои сезон 15",
+                shortText: "Начался новый сезон рейтинговых боев с обновленными наградами.",
+                fullText: "Стартовал 15 сезон рейтинговых боев, который продлится до 15 мая. В этом сезоне полностью переработана система наград: теперь игроки могут получать не только знаки отличия, но и уникальные стили для техники, которые меняют внешний вид танка в зависимости от достигнутого ранга. Также добавлены эксклюзивные декали и надписи. Для участия в рейтинговых боях доступна техника уровней VIII-X. Новый сезон обещает быть самым конкурентным за последние годы."
+            }
+        ];
+
+        // Функция для отображения списка новостей
+        function renderNewsList() {
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = '';
+            
+            // Используем forEach для перебора массива новостей
+            newsData.forEach(news => {
+                const newsCard = document.createElement('div');
+                newsCard.className = 'news-card';
+                
+                newsCard.innerHTML = `
+                    <div class="news-image">${news.imageSmall}</div>
+                    <div class="news-content">
+                        <div class="news-title">${news.title}</div>
+                        <span class="news-date">${formatDate(news.date)}</span>
+                        <div class="news-short">${news.shortText}</div>
+                        <a href="#" class="news-link" data-id="${news.id}">Читать подробнее</a>
+                    </div>
+                `;
+                
+                newsContainer.appendChild(newsCard);
+            });
+            
+            // Добавляем обработчики событий для ссылок
+            document.querySelectorAll('.news-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const newsId = parseInt(this.getAttribute('data-id'));
+                    showNewsDetail(newsId);
+                });
+            });
+        }
+
+        // Функция для отображения детальной информации о новости
+        function showNewsDetail(newsId) {
+            // Используем find для поиска новости по id
+            const news = newsData.find(item => item.id === newsId);
+            
+            const newsDetailContainer = document.getElementById('news-detail');
+            
+            if (news) {
+                newsDetailContainer.innerHTML = `
+                    <div class="detail-image">${news.imageLarge}</div>
+                    <h2 class="detail-title">${news.title}</h2>
+                    <span class="detail-date">${formatDate(news.date)}</span>
+                    <div class="detail-full-text">${news.fullText}</div>
+                `;
+                
+                // Переключаем страницы
+                document.getElementById('news-list-page').classList.add('hidden');
+                document.getElementById('news-detail-page').classList.remove('hidden');
+                document.getElementById('about-page').classList.add('hidden');
+                document.getElementById('contacts-page').classList.add('hidden');
+                
+                // Обновляем активную ссылку в навигации
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+            }
+        }
+
+        // Функция для форматирования даты
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('ru-RU', options);
+        }
+
+        // Функция для переключения страниц
+        function showPage(pageId) {
+            // Скрываем все страницы
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // Показываем выбранную страницу
+            document.getElementById(pageId).classList.remove('hidden');
+            
+            // Обновляем активную ссылку в навигации
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Если показываем список новостей, перерисовываем его
+            if (pageId === 'news-list-page') {
+                renderNewsList();
+            }
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Показываем список новостей при загрузке
+            renderNewsList();
+            
+            // Обработчик для кнопки "Назад к списку новостей"
+            document.getElementById('back-to-news').addEventListener('click', function(e) {
+                e.preventDefault();
+                showPage('news-list-page');
+            });
+            
+            // Обработчики для навигационных ссылок
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page') + '-page';
+                    showPage(pageId);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
